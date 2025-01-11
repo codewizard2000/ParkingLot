@@ -19,10 +19,13 @@ public class Main {
         Vehicle bike1 = VehicleFactory.createVehicle("XYZ789", VehicleType.BIKE);
         Vehicle truck1 = VehicleFactory.createVehicle("LMN456", VehicleType.TRUCK);
 
+        Payment cashPayment = new CashPayment();
+        Payment cardPayment = new CardPayment();
+
         try {
-            parkingLot.parkVehicle(car1);
-            parkingLot.parkVehicle(bike1);
-            parkingLot.parkVehicle(truck1);
+            parkingLot.parkVehicle(car1,cardPayment);
+            parkingLot.parkVehicle(bike1,cardPayment);
+            parkingLot.parkVehicle(truck1,cardPayment);
         } catch (ParkingFullException e) {
             System.out.println(e.getMessage());
         }
