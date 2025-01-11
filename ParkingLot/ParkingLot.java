@@ -28,11 +28,12 @@ class ParkingLot {
         spots.get(spot.getType()).add(spot);
     }
 
-    public boolean parkVehicle(Vehicle vehicle) throws ParkingFullException {
+    public boolean parkVehicle(Vehicle vehicle,Payment payment) throws ParkingFullException {
         List<ParkingSpot> availableSpots = spots.get(vehicle.getType());
         availableSpots.sort(Comparator.comparingInt(ParkingSpot::getGateNumber)); // Sort by gate number
         for (ParkingSpot spot : availableSpots) {
             if (spot.parkVehicle(vehicle)) {
+                payment.pay(spot.getRate());
                 return true;
             }
         }
